@@ -1,6 +1,7 @@
 import { jest } from "@jest/globals";
 import { recommendationRepository } from "../../src/repositories/recommendationRepository";
 import { recommendationService } from "../../src/services/recommendationsService";
+import { idFactory } from "../factories/idFactory";
 import { recommendationFactory } from "../factories/recommendationFactory";
 
 beforeEach(() => {
@@ -10,7 +11,7 @@ beforeEach(() => {
 
 describe("Recommendations Service unit test", () => {
   it("Should create a recommendation", async () => {
-    const recommendation = await recommendationFactory();
+    const recommendation = recommendationFactory();
     jest
       .spyOn(recommendationRepository, "findByName")
       .mockImplementationOnce((): any => {});
@@ -25,7 +26,7 @@ describe("Recommendations Service unit test", () => {
   });
 
   it("Should not create a second recommendation", async () => {
-    const recommendation = await recommendationFactory();
+    const recommendation = recommendationFactory();
     jest
       .spyOn(recommendationRepository, "findByName")
       .mockImplementationOnce((): any => {
@@ -43,5 +44,87 @@ describe("Recommendations Service unit test", () => {
     expect(recommendationRepository.create).not.toBeCalled();
   });
 
-  it.todo("Should add one upvote");
+  it("Should add one upvote", async () => {
+    const id = idFactory();
+    const recommendation = recommendationFactory();
+
+    jest
+    .spyOn(recommendationRepository, "findByName")
+    .mockImplementationOnce((): any => {});
+
+    jest
+      .spyOn(recommendationRepository, "find")
+      .mockImplementationOnce((): any => {
+        return id
+      });
+
+    jest
+      .spyOn(recommendationRepository, "create")
+      .mockImplementationOnce((): any => {
+        return {
+            id,
+            name: recommendation.name,
+            youtubeLink: recommendation.youtubeLink
+        }
+      });
+
+      jest.spyOn(recommendationRepository,'updateScore').mockImplementationOnce((): any => {
+        return id
+      });
+
+      await recommendationService.insert(recommendation);
+      await recommendationService.upvote(id);
+
+      expect(recommendationRepository.create).toBeCalled();
+      expect(recommendationRepository.findByName).toBeCalled();
+      expect(recommendationRepository.find).toBeCalled();
+      expect(recommendationRepository.updateScore).toBeCalled();
+  });
+
+  it("Should not add one upvote", async () => {
+    const id = idFactory();
+    const recommendation = recommendationFactory();
+
+    jest
+    .spyOn(recommendationRepository, "findByName")
+    .mockImplementationOnce((): any => {});
+
+    jest
+      .spyOn(recommendationRepository, "find")
+      .mockImplementationOnce((): any => {
+        return id
+      });
+
+    jest
+      .spyOn(recommendationRepository, "create")
+      .mockImplementationOnce((): any => {
+        return {
+            id,
+            name: recommendation.name,
+            youtubeLink: recommendation.youtubeLink
+        }
+      });
+
+      jest.spyOn(recommendationRepository,'updateScore').mockImplementationOnce((): any => {
+        return id
+      });
+
+      await recommendationService.insert(recommendation);
+      const promise = recommendationService.upvote(id);
+
+      expect(recommendationRepository.create).toBeCalled();
+      expect(recommendationRepository.findByName).toBeCalled();
+      expect(recommendationRepository.find).toBeCalled();
+      expect(promise).toBeInstanceOf(Object)
+      expect(recommendationRepository.updateScore).not.toBeCalled();
+  });
+  it("Should add one downvote", async ()=>{
+    
+  });
+  it.todo("Should not add one downvote");
+  it.todo("Should get the last 10 recommendations");
+  it.todo("Should not get the last 10 recommendations");
+  it.todo("Should get one recommendation by ID");
+  it.todo("Should not get one recommendation by ID");
+
 });
