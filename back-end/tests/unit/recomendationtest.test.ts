@@ -158,6 +158,50 @@ describe("Recommendations Service unit test", () => {
     expect(recommendationRepository.find).toBeCalled();
     expect(recommendationRepository.updateScore).toBeCalled();
   });
+  it("Should remove one recommendation", async () => {
+    const id = idFactory(1);
+    const recommendation = recommendationFactory();
+
+    jest
+      .spyOn(recommendationRepository, "findByName")
+      .mockImplementationOnce((): any => {});
+
+    jest
+      .spyOn(recommendationRepository, "find")
+      .mockImplementationOnce((): any => {
+        return id;
+      });
+
+    jest
+      .spyOn(recommendationRepository, "create")
+      .mockImplementationOnce((): any => {
+        return {
+          id,
+          name: recommendation.name,
+          youtubeLink: recommendation.youtubeLink,
+        };
+      });
+
+    jest
+      .spyOn(recommendationRepository, "updateScore")
+      .mockImplementationOnce((): any => {
+        return { score: -6 };
+      });
+
+    jest
+      .spyOn(recommendationRepository, "remove")
+      .mockImplementationOnce((): any => {
+        return id;
+      });
+
+    await recommendationService.insert(recommendation);
+    await recommendationService.downvote(id);
+
+    expect(recommendationRepository.create).toBeCalled();
+    expect(recommendationRepository.findByName).toBeCalled();
+    expect(recommendationRepository.find).toBeCalled();
+    expect(recommendationRepository.updateScore).toBeCalled();
+  });
   it("Should not add one downvote", async () => {
     const id = idFactory(3);
     const recommendation = recommendationFactory();
@@ -305,6 +349,8 @@ describe("Recommendations Service unit test", () => {
       .mockImplementationOnce((): any => {
         return [];
       });
+    jest.spyOn(Math, "random").mockImplementationOnce(() => 0.5);
+    jest.spyOn(Math, "floor").mockImplementationOnce(() => 0);
 
     const result = recommendationService.getRandom();
 
@@ -313,20 +359,24 @@ describe("Recommendations Service unit test", () => {
   });
   it("Should get the top recommendations", async () => {
     const amount = idFactory(1);
-    jest.spyOn(recommendationRepository, "getAmountByScore").mockImplementationOnce((): any => {
-        return amount
-    })
+    jest
+      .spyOn(recommendationRepository, "getAmountByScore")
+      .mockImplementationOnce((): any => {
+        return amount;
+      });
 
-    const result = await recommendationService.getTop(amount)
+    const result = await recommendationService.getTop(amount);
 
-    expect(result).toEqual(amount)
-  })
+    expect(result).toEqual(amount);
+  });
   it("Should not get the top recommendations", async () => {
     const amount = idFactory(1);
-    jest.spyOn(recommendationRepository, "getAmountByScore").mockImplementationOnce((): any => {})
+    jest
+      .spyOn(recommendationRepository, "getAmountByScore")
+      .mockImplementationOnce((): any => {});
 
-    const result = await recommendationService.getTop(amount)
+    const result = await recommendationService.getTop(amount);
 
-    expect(result).not.toEqual(amount)
-  })
+    expect(result).not.toEqual(amount);
+  });
 });
