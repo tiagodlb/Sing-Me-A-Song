@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>89/89</span>
+                <span class='fraction'>97/97</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>25/25</span>
+                <span class='fraction'>27/27</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>76/76</span>
+                <span class='fraction'>83/83</span>
             </div>
         
             
@@ -184,7 +184,18 @@
 <a name='L119'></a><a href='#L119'>119</a>
 <a name='L120'></a><a href='#L120'>120</a>
 <a name='L121'></a><a href='#L121'>121</a>
-<a name='L122'></a><a href='#L122'>122</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -293,7 +304,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -301,6 +311,18 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -380,7 +402,7 @@ export async function recommendationTest() {
     });
     it("Should return one recommendation via id", async () =&gt; {
       const recommendation = recommendationFactory();
-      for(let i = 0; i &lt; 10; i++){
+      for (let i = 0; i &lt; 10; i++) {
         await server.post("/recommendations").send(recommendation);
       }
 &nbsp;
@@ -402,7 +424,7 @@ export async function recommendationTest() {
     });
     it("Should return random recommendations", async () =&gt; {
       const recommendation = recommendationFactory();
-      for(let i = 0; i &lt; 10; i++){
+      for (let i = 0; i &lt; 10; i++) {
         await server.post("/recommendations").send(recommendation);
       }
       const result = await server.get("/recommendations/random");
@@ -414,15 +436,26 @@ export async function recommendationTest() {
       expect(result.status).toBe(200);
     });
     it("Should return status 404 when trying to get random recommendations", async () =&gt; {
-&nbsp;
       const result = await server.get("/recommendations/random");
 &nbsp;
       const expectedResult = recommendationService.getRandom();
 &nbsp;
       expect(expectedResult).rejects.toBe({
-        message: "", type: "not_found"
+        message: "",
+        type: "not_found",
       });
       expect(result.status).toBe(404);
+    });
+    it("Should give the top recommendations", async () =&gt; {
+      const number = idFactory(2);
+      const result = await server.get(`/recommendations/top/${number}`);
+      const expectedResult = await recommendationRepository.getAmountByScore(
+        number
+      );
+&nbsp;
+      expect(result.status).toBe(200);
+      expect(result.body).not.toBeNull();
+      expect(result.body).toEqual(expectedResult);
     });
   });
 }
@@ -433,7 +466,7 @@ export async function recommendationTest() {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Sun Sep 25 2022 18:40:45 GMT-0300 (Horário Padrão de Brasília)
+                at Sun Sep 25 2022 18:49:15 GMT-0300 (Horário Padrão de Brasília)
             </div>
         <script src="../../prettify.js"></script>
         <script>

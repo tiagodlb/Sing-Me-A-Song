@@ -73,7 +73,7 @@ export async function recommendationTest() {
     });
     it("Should return one recommendation via id", async () => {
       const recommendation = recommendationFactory();
-      for(let i = 0; i < 10; i++){
+      for (let i = 0; i < 10; i++) {
         await server.post("/recommendations").send(recommendation);
       }
 
@@ -95,7 +95,7 @@ export async function recommendationTest() {
     });
     it("Should return random recommendations", async () => {
       const recommendation = recommendationFactory();
-      for(let i = 0; i < 10; i++){
+      for (let i = 0; i < 10; i++) {
         await server.post("/recommendations").send(recommendation);
       }
       const result = await server.get("/recommendations/random");
@@ -107,15 +107,26 @@ export async function recommendationTest() {
       expect(result.status).toBe(200);
     });
     it("Should return status 404 when trying to get random recommendations", async () => {
-
       const result = await server.get("/recommendations/random");
 
       const expectedResult = recommendationService.getRandom();
 
       expect(expectedResult).rejects.toBe({
-        message: "", type: "not_found"
+        message: "",
+        type: "not_found",
       });
       expect(result.status).toBe(404);
+    });
+    it("Should give the top recommendations", async () => {
+      const number = idFactory(2);
+      const result = await server.get(`/recommendations/top/${number}`);
+      const expectedResult = await recommendationRepository.getAmountByScore(
+        number
+      );
+
+      expect(result.status).toBe(200);
+      expect(result.body).not.toBeNull();
+      expect(result.body).toEqual(expectedResult);
     });
   });
 }
