@@ -65,10 +65,29 @@ export async function recommendationTest() {
 
   describe("/GET Recomendation Test suit", () => {
     it("Should get all recommendations", async () => {
-      const result = await server.get("/recommendations")
+      const result = await server.get("/recommendations");
       const findResults = await recommendationRepository.findAll();
-      expect(result.status).toBe(200)
-      expect(result.body).toEqual(findResults)
+      expect(result.status).toBe(200);
+      expect(result.body).toEqual(findResults);
+    });
+    it("Should return one recommendation via id", async () => {
+      const recommendation = recommendationFactory();
+
+      await server.post("/recommendations").send(recommendation);
+
+      const expectedResult = await recommendationRepository.findByName(
+        recommendation.name
+      );
+      const result = await server.get(`/recommendations/${expectedResult.id}`);
+
+      expect(result.body).toEqual(expectedResult);
+      expect(result.status).toBe(200);
+    });
+    it("Should return status 404 when trying to find recommendation via id", async () => {
+      const id = idFactory(3);
+
+      const result = await server.get(`/recommendations/${id}`);
+      expect(result.status).toBe(404)
     })
-  })
+  });
 }
