@@ -62,4 +62,13 @@ export async function recommendationTest() {
       expect(result.status).toBe(404);
     });
   });
+
+  describe("/GET Recomendation Test suit", () => {
+    it("Should get all recommendations", async () => {
+      const result = await server.get("/recommendations")
+      const findResults = await recommendationRepository.findAll();
+      expect(result.status).toBe(200)
+      expect(result.body).toEqual(findResults)
+    })
+  })
 }
