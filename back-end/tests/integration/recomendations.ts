@@ -28,6 +28,25 @@ export async function recommendationTest() {
 
       expect(result.status).toBe(409);
     });
+    it("Should try to create a recommendation with a invalid body", async () => {
+      const result = await server.post("/recommendations").send();
+      expect(result.status).toBe(422);
+    });
+    it("Should try to create a recommendation with a invalid body", async () => {
+      const recommendation = recommendationFactory()
+      const result = await server.post("/recommendations").send(recommendation.name);
+      expect(result.status).toBe(422);
+    });
+    it("Should try to create a recommendation with a invalid body", async () => {
+      const recommendation = recommendationFactory()
+      const result = await server.post("/recommendations").send(recommendation.youtubeLink);
+      expect(result.status).toBe(422);
+    });
+    it("Should try to create a recommendation with a invalid body", async () => {
+      const recommendation = recommendationFactory()
+      const result = await server.post("/recommendations").send({name: recommendation.name, youtubeLink: "www.wronglink.com"});
+      expect(result.status).toBe(422);
+    });
     it("Should give an upvote", async () => {
       const recommendation = recommendationFactory();
 
@@ -111,7 +130,7 @@ export async function recommendationTest() {
 
       const expectedResult = recommendationService.getRandom();
 
-      expect(expectedResult).rejects.toBe({
+      expect(expectedResult).rejects.toStrictEqual({
         message: "",
         type: "not_found",
       });
@@ -127,6 +146,16 @@ export async function recommendationTest() {
       expect(result.status).toBe(200);
       expect(result.body).not.toBeNull();
       expect(result.body).toEqual(expectedResult);
+    });
+    it('should return a `500` status code', async () => {
+      jest
+        .spyOn(recommendationRepository, 'findAll')
+        .mockImplementationOnce((): any => {
+          throw new Error('Internal server error');
+        });
+  
+      const result = await server.get('/recommendations');
+      expect(result.statusCode).toBe(500);
     });
   });
 }
