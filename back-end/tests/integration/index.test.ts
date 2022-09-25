@@ -8,7 +8,7 @@ beforeEach(async () => {
 });
 
 recommendationTest();
-
-afterAll(async () => {
+ 
+afterAll(async () => { 
   prisma.$disconnect();
 });
