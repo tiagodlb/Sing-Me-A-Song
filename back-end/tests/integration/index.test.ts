@@ -1,4 +1,5 @@
 import { prisma } from "../../src/database";
+import { recommendationTest } from "./recomendations";
 
 beforeEach(async () => {
   await prisma.$transaction([
@@ -6,7 +7,7 @@ beforeEach(async () => {
   ]);
 });
 
-
+recommendationTest();
 
 afterAll(async () => {
   prisma.$disconnect();

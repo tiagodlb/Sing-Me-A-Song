@@ -1,26 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1664107853642" clover="3.2.0">
-  <project timestamp="1664107853642" name="All files">
-    <metrics statements="35" coveredstatements="33" conditionals="6" coveredconditionals="4" methods="9" coveredmethods="9" elements="50" coveredelements="46" complexity="0" loc="35" ncloc="35" packages="2" files="2" classes="2"/>
+<coverage generated="1664109593987" clover="3.2.0">
+  <project timestamp="1664109593987" name="All files">
+    <metrics statements="109" coveredstatements="90" conditionals="8" coveredconditionals="6" methods="23" coveredmethods="17" elements="140" coveredelements="113" complexity="0" loc="109" ncloc="109" packages="7" files="8" classes="8"/>
     <package name="src">
-      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="database.ts" path="/home/user/Área de Trabalho/driven/sing-me-a-song/back-end/src/database.ts">
-        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="app.ts" path="/home/user/Área de Trabalho/driven/sing-me-a-song/back-end/src/app.ts">
+        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+      </file>
+      <file name="database.ts" path="/home/user/Área de Trabalho/driven/sing-me-a-song/back-end/src/database.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.controllers">
+      <metrics statements="25" coveredstatements="8" conditionals="1" coveredconditionals="0" methods="7" coveredmethods="1"/>
+      <file name="recommendationController.ts" path="/home/user/Área de Trabalho/driven/sing-me-a-song/back-end/src/controllers/recommendationController.ts">
+        <metrics statements="25" coveredstatements="8" conditionals="1" coveredconditionals="0" methods="7" coveredmethods="1"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="8" count="3" type="cond" truecount="0" falsecount="1"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.middlewares">
+      <metrics statements="6" coveredstatements="5" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <file name="errorHandlerMiddleware.ts" path="/home/user/Área de Trabalho/driven/sing-me-a-song/back-end/src/middlewares/errorHandlerMiddleware.ts">
+        <metrics statements="6" coveredstatements="5" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="16" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.routers">
+      <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="recommendationRouter.ts" path="/home/user/Área de Trabalho/driven/sing-me-a-song/back-end/src/routers/recommendationRouter.ts">
+        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.schemas">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="recommendationsSchemas.ts" path="/home/user/Área de Trabalho/driven/sing-me-a-song/back-end/src/schemas/recommendationsSchemas.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.services">
-      <metrics statements="32" coveredstatements="30" conditionals="6" coveredconditionals="4" methods="9" coveredmethods="9"/>
+      <metrics statements="32" coveredstatements="31" conditionals="6" coveredconditionals="5" methods="9" coveredmethods="9"/>
       <file name="recommendationsService.ts" path="/home/user/Área de Trabalho/driven/sing-me-a-song/back-end/src/services/recommendationsService.ts">
-        <metrics statements="32" coveredstatements="30" conditionals="6" coveredconditionals="4" methods="9" coveredmethods="9"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="8" count="6" type="stmt"/>
-        <line num="11" count="6" type="cond" truecount="1" falsecount="0"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="14" count="5" type="stmt"/>
+        <metrics statements="32" coveredstatements="31" conditionals="6" coveredconditionals="5" methods="9" coveredmethods="9"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="8" count="9" type="stmt"/>
+        <line num="11" count="9" type="cond" truecount="1" falsecount="0"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="14" count="7" type="stmt"/>
         <line num="18" count="3" type="stmt"/>
         <line num="20" count="1" type="stmt"/>
         <line num="24" count="1" type="stmt"/>
@@ -43,10 +126,34 @@
         <line num="70" count="2" type="cond" truecount="1" falsecount="0"/>
         <line num="71" count="1" type="stmt"/>
         <line num="74" count="1" type="stmt"/>
-        <line num="78" count="2" type="cond" truecount="0" falsecount="1"/>
-        <line num="79" count="0" type="stmt"/>
-        <line num="82" count="2" type="stmt"/>
-        <line num="85" count="1" type="stmt"/>
+        <line num="78" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="85" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="tests.integration">
+      <metrics statements="18" coveredstatements="18" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
+      <file name="recomendations.ts" path="/home/user/Área de Trabalho/driven/sing-me-a-song/back-end/tests/integration/recomendations.ts">
+        <metrics statements="18" coveredstatements="18" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
       </file>
     </package>
   </project>

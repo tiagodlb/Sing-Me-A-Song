@@ -3,6 +3,6 @@ import { faker } from "@faker-js/faker";
 export function recommendationFactory() {
   return {
     name: faker.music.songName(),
-    youtubeLink: faker.internet.url(),
+    youtubeLink: "https://www.youtube.com/watch?v="+faker.random.word(),
   };
 }
