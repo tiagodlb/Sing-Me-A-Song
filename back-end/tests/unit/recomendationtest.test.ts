@@ -23,4 +23,25 @@ describe("Recommendations Service unit test", () => {
     expect(recommendationRepository.findByName).toBeCalled();
     expect(recommendationRepository.create).toBeCalled();
   });
+
+  it("Should not create a second recommendation", async () => {
+    const recommendation = await recommendationFactory();
+    jest
+      .spyOn(recommendationRepository, "findByName")
+      .mockImplementationOnce((): any => {
+        return recommendation;
+      });
+    jest
+      .spyOn(recommendationRepository, "create")
+      .mockImplementationOnce((): any => {});
+
+    const promise = recommendationService.insert(recommendation);
+    expect(promise).rejects.toEqual({
+      type: "conflict",
+      message: "Recommendations names must be unique",
+    });
+    expect(recommendationRepository.create).not.toBeCalled();
+  });
+
+  it.todo("Should add one upvote");
 });
