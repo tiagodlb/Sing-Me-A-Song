@@ -1,12 +1,20 @@
 context('Unit tests', () => {
   beforeEach(() => {
+    cy.intercept("GET", "/top").as("getRecommendations");
     cy.visit('http://localhost:3000/top');
+    cy.wait("@getRecommendations").then(interception => {
+      cy.wrap(interception.response.statusCode).should('eq', 200)
+    });
+    cy.wait(1000);
   })
 
   it('Should upvote a recommendation', () => {
     cy.get('[data-cy="cy-score"]').first().invoke('text').then(parseInt).then((number) => {
-      cy.get('[data-cy="cy-upvote-btn"]').first().click({force: true});
-      cy.wait(5000);
+      cy.intercept("POST", "/recommendations/22/upvote").as("upvote");
+      cy.get('[data-cy="cy-upvote-btn"]').first().click({ force: true });
+      cy.wait(1000);
+      cy.wait("@upvote");
+      cy.wait(1000);
       cy.get('[data-cy="cy-score"]').first().invoke('text').then(parseInt).then((newNumber) => {
         expect(newNumber).to.equal(number + 1)
       })
@@ -15,8 +23,11 @@ context('Unit tests', () => {
 
   it('Should downvote a recommendation', () => {
     cy.get('[data-cy="cy-score"]').first().invoke('text').then(parseInt).then((number) => {
-      cy.get('[data-cy="cy-downvote-btn"]').first().click({force: true});
-      cy.wait(5000);
+      cy.intercept("POST", "/recommendations/22/downvote").as("downvote");
+      cy.get('[data-cy="cy-downvote-btn"]').first().click({ force: true });
+      cy.wait(1000);
+      cy.wait("@downvote");
+      cy.wait(1000);
       cy.get('[data-cy="cy-score"]').first().invoke('text').then(parseInt).then((newNumber) => {
         expect(newNumber).to.equal(number - 1)
       })
@@ -37,6 +48,15 @@ context('Unit tests', () => {
 })
 
 context('Navigation menu tests', () => {
+  beforeEach(() => {
+    cy.intercept("GET", "/top").as("getRecommendations");
+    cy.visit('http://localhost:3000/top');
+    cy.wait("@getRecommendations").then(interception => {
+      cy.wrap(interception.response.statusCode).should('eq', 200)
+    });
+    cy.wait(1000);
+  })
+
   it('Should navigate to home page', () => {
     cy.visit('http://localhost:3000/top');
     cy.get('[data-cy="cy-menu"]').click();
