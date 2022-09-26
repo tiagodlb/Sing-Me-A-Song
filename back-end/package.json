@@ -11,8 +11,12 @@
     "prisma:migrate": "prisma migrate dev",
     "prisma:prod": "prisma migrate deploy",
     "prisma:test": "dotenv -e .env.test prisma migrate reset --skip-seed",
-    "test": "npm run prisma:test && dotenv -e .env.test jest --no-cache",
+    "prisma:seed": "dotenv -e .env.test prisma migrate dev && dotenv -e .env.test prisma db seed",
+    "test": "dotenv -e .env.test prisma migrate dev && dotenv -e .env.test prisma db seed && dotenv -e .env.test jest --no-cache",
     "test:unit": "dotenv -e .env.test jest -- -i --coverage --testPathPattern=tests/unit"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "keywords": [],
   "author": "",
