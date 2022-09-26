@@ -28,6 +28,12 @@ context('Unit tests', () => {
       .find('iframe')
       .should('have.attr', 'title', 'Gerudo Valley Remix | Super Smash Bros. Ultimate');
   });
+
+  it('Should validate that there is only 10  recommendations', () => {
+    cy.get('[data-cy="cy-score"]').invoke('text').then(parseInt).then(() => {
+      cy.get('[data-cy="cy-upvote-btn"]').should("have.length.lte", 10);
+    })
+  })
 })
 
 context('Navigation menu tests', () => {
