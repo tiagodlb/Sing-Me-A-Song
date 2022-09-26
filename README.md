@@ -60,11 +60,28 @@ git clone https://github.com/tiagodlb/Sing-Me-A-Song.git
 Then run the following command to install the project's dependencies:
 
 ```bash
-npm install
+npm install //OBS: you'll need to do this in both folders.
 ```
+These are the back end commands that you'll need to know:
 
 ```bash
-npm run dev
+npm run build              // create the project build
+npm run start              // run the project, not recommended since you'll need also have to change all the import directories
+npm run dev                // recommended way to run the project
+npm run prisma:reset       // reset the prisma database
+npm run prisma:migrate     // migrate the prisma database, you should do this after the npm install
+npm run prisma:prod        // starts prisma build production process, do this if you want to make a deploy 
+npm run prisma:test        // resets the database in order to make the tests more accurate
+npm run prisma:seed        // start the seeding process, create data in the database
+npm run test               // resets the database in order to make the tests more accurate
+npm run test:unit          // starts the testing process
+```
+
+These are the front end commands that you'll need to know:
+
+```bash
+npm run start         // starts the project
+npm run cypress:open  // open cypress
 ```
 
 <!-- Middlewares -->
